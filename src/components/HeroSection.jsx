@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowDown, Compass, Coffee, Sparkles, BookOpen } from 'lucide-react';
+import { ArrowDown, Compass, Coffee, Sparkles, BookOpen, UtensilsCrossed } from 'lucide-react';
 
 export default function HeroSection() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -55,7 +55,7 @@ export default function HeroSection() {
         className="absolute -bottom-28 left-1/3 w-[460px] h-[460px] rounded-full bg-gradient-to-tr from-[#3B261D]/10 via-[#F5EFE6]/40 to-transparent blur-3xl pointer-events-none animate-orb-3"
       />
 
-      {/* Subtle Noise / Warm Glow Overlay */}
+      {/* Ambient Noise / Warm Glow Overlay */}
       <div className="absolute inset-0 bg-radial-vignette opacity-40 pointer-events-none" />
 
       {/* Main Container */}
@@ -67,16 +67,16 @@ export default function HeroSection() {
               ===================================================================== */}
           <div className="lg:col-span-7 flex flex-col justify-center animate-fade-in-up">
             
-            {/* Top Pill Badge: Artisanal Brews & Slow Living */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#F0E8DC]/80 border border-[#3B261D]/10 backdrop-blur-md shadow-warm-sm mb-6 w-fit">
-              <span className="w-2 h-2 rounded-full bg-[#C86D51] animate-pulse" />
+            {/* Top Pill Badge: Pure Veg Coffee & Kitchen */}
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#F0E8DC]/90 border border-[#3B261D]/10 backdrop-blur-md shadow-warm-sm mb-6 w-fit">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#2E7D32] ring-2 ring-[#2E7D32]/30 animate-pulse" />
               <span className="text-[#C86D51] text-xs">✦</span>
               <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#3B261D]">
-                Artisanal Brews &amp; Slow Living
+                100% Pure Veg Coffee House &amp; Kitchen
               </span>
               <span className="text-[#3B261D]/30">•</span>
               <span className="text-[11px] sm:text-xs font-semibold text-[#7E5745]">
-                11:00 AM – 11:00 PM Daily
+                Ulkanagari • Open Till 2:15 AM
               </span>
             </div>
 
@@ -84,24 +84,29 @@ export default function HeroSection() {
             <h1 className="font-editorial text-5xl sm:text-6xl md:text-7xl xl:text-[76px] font-bold text-[#3B261D] tracking-tight leading-[1.08] mb-6">
               Where Every Sip{' '}
               <span className="block font-serif italic text-[#C86D51] font-normal mt-1">
-                Tells a Story.
+                Tells Two Stories.
               </span>
             </h1>
 
             {/* Editorial Body Description */}
             <p className="text-base sm:text-lg text-[#644436] font-normal leading-relaxed max-w-xl mb-8">
-              An aesthetic sanctuary in the cultural heart of Samarth Nagar, Nirala Bazar. Single-origin coffees, hand-laminated brioche toasts, and unhurried conversations tucked beneath warm linen lamps.
+              An aesthetic, pure vegetarian coffee house and kitchen in the heart of Ulkanagari. Single-origin manual pours, sizzling hot plates, handcrafted footlongs, artisanal pasta, 10-inch stone-baked pizzas, and decadent shakes for conversations that linger late into the night.
             </p>
 
-            {/* Call To Action Row (With 'Book a Table' removed per instructions) */}
+            {/* Call To Action Row */}
             <div className="flex flex-wrap items-center gap-4 mb-12">
               <button
                 onClick={scrollToMenu}
                 className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#3B261D] hover:bg-[#C86D51] text-[#FAF7F2] font-bold text-sm sm:text-base shadow-warm-lg hover:shadow-warm-xl transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 cursor-pointer"
               >
-                <span>Explore Curation</span>
+                <span>Explore Pure Veg Menu</span>
                 <ArrowDown className="w-4 h-4 text-[#FAF7F2] group-hover:translate-y-1 transition-transform" />
               </button>
+
+              <div className="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-[#F0E8DC] border border-[#3B261D]/10 text-xs font-bold text-[#3B261D]">
+                <span className="w-2 h-2 rounded-full bg-[#2E7D32]" />
+                <span>100+ Pure Veg Delights</span>
+              </div>
             </div>
 
             {/* Bottom Highlights Row */}
@@ -110,21 +115,21 @@ export default function HeroSection() {
                 <div className="w-7 h-7 rounded-lg bg-[#F0E8DC] flex items-center justify-center shrink-0">
                   <Compass className="w-4 h-4 text-[#C86D51]" />
                 </div>
-                <span>Beside IRA Executive</span>
+                <span>Near Khinvansara Park</span>
               </div>
 
               <div className="flex items-center gap-2.5">
                 <div className="w-7 h-7 rounded-lg bg-[#F0E8DC] flex items-center justify-center shrink-0">
                   <Coffee className="w-4 h-4 text-[#C86D51]" />
                 </div>
-                <span>100% Specialty Arabica</span>
+                <span>Specialty Arabica Brews</span>
               </div>
 
               <div className="flex items-center gap-2.5">
                 <div className="w-7 h-7 rounded-lg bg-[#F0E8DC] flex items-center justify-center shrink-0">
-                  <Sparkles className="w-4 h-4 text-[#C86D51]" />
+                  <UtensilsCrossed className="w-4 h-4 text-[#C86D51]" />
                 </div>
-                <span>Handcrafted Bakes</span>
+                <span>Sizzlers &amp; Footlongs</span>
               </div>
             </div>
 
@@ -147,24 +152,24 @@ export default function HeroSection() {
               <div className="relative rounded-[2.5rem] overflow-hidden border-2 border-[#3B261D]/15 shadow-warm-xl bg-[#F0E8DC] aspect-[4/5] group">
                 <img 
                   src="/img1.png" 
-                  alt="Tales & Toast Café Interior & Coffee Sanctuary"
+                  alt="Two Stories Coffee House & Kitchen Interior"
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
 
                 {/* Ambient Subtle Warm Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#23150F]/30 via-transparent to-transparent pointer-events-none" />
 
-                {/* Single Floating Top-Right Badge: Nirala Bazar Sanctuary for Minds */}
+                {/* Single Floating Top-Right Badge: Ulkanagari Two Stories Sanctuary */}
                 <div className="absolute top-5 right-5 z-20 flex items-center gap-2.5 px-3.5 py-2 rounded-2xl bg-[#23150F]/90 backdrop-blur-md text-[#FAF7F2] border border-white/15 shadow-xl">
                   <div className="w-6 h-6 rounded-lg bg-[#C86D51] flex items-center justify-center text-white shrink-0">
                     <BookOpen className="w-3.5 h-3.5" />
                   </div>
                   <div>
                     <span className="text-[9px] font-bold tracking-widest uppercase text-[#FAF7F2]/70 block leading-tight">
-                      NIRALA BAZAR
+                      ULKANAGARI
                     </span>
                     <span className="text-xs font-bold text-white block leading-tight">
-                      Sanctuary for Minds
+                      Two Stories Sanctuary
                     </span>
                   </div>
                 </div>
@@ -180,7 +185,7 @@ export default function HeroSection() {
                 <div className="relative aspect-square overflow-hidden bg-[#FAF7F2]">
                   <img 
                     src="/img2.png" 
-                    alt="Artisanal Cappuccino & Book"
+                    alt="Two Stories Handcrafted Cappuccino & Book"
                     className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
                   />
                   {/* Subtle steam glow */}

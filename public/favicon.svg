@@ -1,12 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
   <rect width="100" height="100" rx="24" fill="#3B261D" />
   <circle cx="50" cy="50" r="42" stroke="#C86D51" stroke-width="2" stroke-dasharray="4 4" />
-  <!-- Coffee Cup & Warm Toast Motif -->
-  <path d="M30 46 H62 V64 C62 70 56 75 46 75 C36 75 30 70 30 64 Z" fill="#FAF7F2" />
-  <path d="M62 50 H69 C73 50 76 53 76 57 C76 61 73 64 69 64 H62" stroke="#FAF7F2" stroke-width="4" stroke-linecap="round" />
-  <path d="M26 77 H66" stroke="#C86D51" stroke-width="4" stroke-linecap="round" />
+  <!-- Two Stories Open Book & Coffee Motif -->
+  <!-- Left Story / Page -->
+  <path d="M28 62 C34 58 44 58 50 63 L50 35 C44 31 34 31 28 35 Z" fill="#FAF7F2" opacity="0.95" />
+  <!-- Right Story / Page -->
+  <path d="M72 62 C66 58 56 58 50 63 L50 35 C56 31 66 31 72 35 Z" fill="#F0E8DC" />
+  <!-- Spine -->
+  <line x1="50" y1="35" x2="50" y2="64" stroke="#C86D51" stroke-width="3" stroke-linecap="round" />
+  <!-- Steaming Coffee Cup in Center Bottom -->
+  <circle cx="50" cy="74" r="10" fill="#C86D51" />
+  <path d="M44 74 H56" stroke="#FAF7F2" stroke-width="2" stroke-linecap="round" />
   <!-- Steam Curves -->
-  <path d="M38 38 C36 34 40 30 38 25" stroke="#C86D51" stroke-width="3" stroke-linecap="round" fill="none" />
-  <path d="M48 39 C46 33 50 29 48 23" stroke="#C86D51" stroke-width="3" stroke-linecap="round" fill="none" />
-  <path d="M57 38 C55 34 59 30 57 25" stroke="#C86D51" stroke-width="3" stroke-linecap="round" fill="none" />
+  <path d="M44 26 C42 22 46 19 44 15" stroke="#C86D51" stroke-width="2.5" stroke-linecap="round" fill="none" />
+  <path d="M50 25 C48 21 52 18 50 14" stroke="#FAF7F2" stroke-width="2.5" stroke-linecap="round" fill="none" />
+  <path d="M56 26 C54 22 58 19 56 15" stroke="#C86D51" stroke-width="2.5" stroke-linecap="round" fill="none" />
 </svg>

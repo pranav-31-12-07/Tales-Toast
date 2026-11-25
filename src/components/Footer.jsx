@@ -14,6 +14,8 @@ export default function Footer() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const googleMapsUrl = "https://www.google.com/maps/search/?api=1&query=Two+Stories+Cafe,+V87Q%2B3X5,+4-13-693,+Shrikrishna+Nagar,+Ulkanagari,+Chhatrapati+Sambhajinagar,+Maharashtra+431009";
+
   return (
     <footer className="bg-[#3B261D] text-[#FAF7F2] pt-16 pb-12 border-t border-[#FAF7F2]/10 relative overflow-hidden">
       {/* Subtle Warm Gradient Accent */}
@@ -30,51 +32,66 @@ export default function Footer() {
               <div className="w-10 h-10 rounded-xl bg-[#C86D51] flex items-center justify-center text-white shadow-warm-sm">
                 <Coffee className="w-5 h-5" />
               </div>
-              <span className="font-editorial text-2xl font-bold tracking-tight text-[#FAF7F2]">
-                Tales &amp; Toast
-              </span>
+              <div>
+                <span className="font-editorial text-2xl font-bold tracking-tight text-[#FAF7F2] block leading-tight">
+                  Two Stories
+                </span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-[#C86D51] block">
+                  Coffee &amp; Kitchen • Pure Veg
+                </span>
+              </div>
             </div>
 
             <p className="text-sm text-[#FAF7F2]/80 leading-relaxed max-w-sm mb-6">
-              An aesthetic café and lounge beside IRA Executive in Samarth Nagar (Nirala Bazar), Chhatrapati Sambhajinagar. Handcrafted coffees, artisanal bites, and cozy moments.
+              A pure vegetarian coffee house and kitchen in Ulkanagari (Near Khinvansara Park), Chhatrapati Sambhajinagar. Specialty pour-overs, cold brews, sizzling platters, and handcrafted culinary comforts.
             </p>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <a
-                href="https://www.instagram.com/tales_and_toast/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-[#FAF7F2]/10 hover:bg-[#C86D51] text-[#FAF7F2] flex items-center justify-center transition-colors"
-                aria-label="Instagram"
-                title="Instagram @tales_and_toast"
-              >
-                <InstagramIcon className="w-4 h-4" />
-              </a>
-              <a
-                href="https://www.zomato.com/aurangabad/tales-toast-nirala-bazar"
+                href="https://www.zomato.com/aurangabad/two-stories-ulkanagari"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-[#FAF7F2]/10 hover:bg-[#C62828] text-[#FAF7F2] flex items-center justify-center font-extrabold text-sm transition-colors"
                 aria-label="Zomato"
-                title="Tales & Toast on Zomato"
+                title="Two Stories on Zomato"
               >
                 Z
               </a>
               <a
-                href="https://www.district.in/dining/aurangabad/tales-toast-nirala-bazar?srsltid=AYCX9vInPs_ImSotNfk0QOBZAN3KiR9BiAEpL0ZZU_tBg688orAC4HbD"
+                href="https://www.swiggy.com/city/aurangabad/two-stories-ulkanagari-rest1088507"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-[#FAF7F2]/10 hover:bg-[#FC8019] text-[#FAF7F2] flex items-center justify-center font-extrabold text-sm transition-colors"
+                aria-label="Swiggy"
+                title="Two Stories on Swiggy"
+              >
+                S
+              </a>
+              <a
+                href="https://www.district.in/dining/aurangabad/two-stories-ulkanagari"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-[#FAF7F2]/10 hover:bg-[#C86D51] text-[#FAF7F2] flex items-center justify-center font-black text-xs transition-colors"
                 aria-label="District"
-                title="Tales & Toast on District"
+                title="Two Stories on District"
               >
                 D
               </a>
               <a
-                href="tel:+917677252525"
+                href="https://www.instagram.com/popular/two-stories-cafe-aurangabad/?hl=en"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-[#FAF7F2]/10 hover:bg-[#C86D51] text-[#FAF7F2] flex items-center justify-center transition-colors"
+                aria-label="Instagram"
+                title="Two Stories on Instagram"
+              >
+                <InstagramIcon className="w-4 h-4" />
+              </a>
+              <a
+                href="tel:+919922822247"
                 className="w-10 h-10 rounded-full bg-[#FAF7F2]/10 hover:bg-[#C86D51] text-[#FAF7F2] flex items-center justify-center transition-colors"
                 aria-label="Call Us"
-                title="Call +91 76772 52525"
+                title="Call +91 99228 22247"
               >
                 <Phone className="w-4 h-4" />
               </a>
@@ -84,7 +101,7 @@ export default function Footer() {
           {/* Quick Links */}
           <div className="lg:col-span-3">
             <h4 className="text-xs font-bold uppercase tracking-widest text-[#C86D51] mb-4">
-              Quick Exploration
+              Explore Two Stories
             </h4>
             <ul className="space-y-2.5 text-sm text-[#FAF7F2]/80">
               <li>
@@ -92,27 +109,32 @@ export default function Footer() {
                   onClick={scrollToTop}
                   className="hover:text-[#C86D51] transition-colors cursor-pointer"
                 >
-                  3D Exploded Burger Hero
+                  Coffee House Story
                 </button>
               </li>
               <li>
                 <a href="#menu" className="hover:text-[#C86D51] transition-colors">
-                  Artisanal Food &amp; Coffee Menu
+                  100% Pure Veg Menu
+                </a>
+              </li>
+              <li>
+                <a href="#atmosphere" className="hover:text-[#C86D51] transition-colors">
+                  Atmosphere &amp; Ambience
                 </a>
               </li>
               <li>
                 <a href="#visit" className="hover:text-[#C86D51] transition-colors">
-                  Map &amp; Landmark Directions
+                  Location &amp; Directions
                 </a>
               </li>
               <li>
                 <a
-                  href="https://www.google.com/maps/search/?api=1&query=Plot+no+231%2C+Varad+Ganesh+Mandir+Rd%2C+Samarth+Nagar%2C+Chhatrapati+Sambhajinagar%2C+Maharashtra+431001"
+                  href={googleMapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-[#C86D51] transition-colors"
                 >
-                  Open in Google Maps
+                  Plus Code: V87Q+3X5
                 </a>
               </li>
             </ul>
@@ -121,30 +143,35 @@ export default function Footer() {
           {/* Visit & Hours */}
           <div className="lg:col-span-4">
             <h4 className="text-xs font-bold uppercase tracking-widest text-[#C86D51] mb-4">
-              Café Sanctuary
+              Café &amp; Kitchen Sanctuary
             </h4>
             <div className="space-y-3 text-sm text-[#FAF7F2]/80">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#C86D51] shrink-0 mt-0.5" />
                 <span>
-                  Plot no 231, Varad Ganesh Mandir Rd, Samarth Nagar (beside IRA Executive), Nirala Bazar, Chhatrapati Sambhajinagar 431001
+                  CTS 15735/30, Shop 5 &amp; 6, Plot 2, Sai Heritage, Ward 98, Zone 7, Near Khinvansara Park (Shrikrishna Nagar), Ulkanagari, Chhatrapati Sambhajinagar 431009
                 </span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-[#C86D51] shrink-0" />
-                <a href="tel:+917677252525" className="hover:underline text-[#FAF7F2]">
-                  +91 76772 52525
+                <a href="tel:+919922822247" className="hover:underline text-[#FAF7F2]">
+                  +91 99228 22247
                 </a>
               </div>
-              <div className="p-3 rounded-xl bg-[#FAF7F2]/5 border border-[#FAF7F2]/10 mt-3">
-                <p className="text-xs font-semibold text-[#C86D51] uppercase tracking-wider">
-                  Open Daily
-                </p>
-                <p className="text-sm font-bold text-[#FAF7F2]">
-                  11:00 AM – 11:00 PM
+              <div className="p-3.5 rounded-xl bg-[#FAF7F2]/5 border border-[#FAF7F2]/10 mt-3">
+                <div className="flex items-center justify-between">
+                  <p className="text-xs font-semibold text-[#C86D51] uppercase tracking-wider">
+                    Operating Hours
+                  </p>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-900/60 text-emerald-300">
+                    Open Daily
+                  </span>
+                </div>
+                <p className="text-sm font-bold text-[#FAF7F2] mt-1">
+                  12:00 PM – 12:00 AM &amp; Till 2:15 AM
                 </p>
                 <p className="text-xs text-[#FAF7F2]/60 mt-0.5">
-                  Walk-ins warmly welcomed anytime
+                  Approx. ~₹550 for two • Dine-in, Takeaway &amp; Delivery
                 </p>
               </div>
             </div>
@@ -155,7 +182,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#FAF7F2]/60">
           <p className="flex items-center gap-1">
-            <span>© {new Date().getFullYear()} Tales &amp; Toast. Crafted with</span>
+            <span>© {new Date().getFullYear()} Two Stories Coffee &amp; Kitchen. Pure Vegetarian in Ulkanagari. Crafted with</span>
             <Heart className="w-3.5 h-3.5 text-[#C86D51] fill-[#C86D51]" />
             <span>in Chhatrapati Sambhajinagar.</span>
           </p>

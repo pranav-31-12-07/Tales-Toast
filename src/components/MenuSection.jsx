@@ -1,53 +1,63 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { MENU_ITEMS, CATEGORIES } from '../data/menuData';
 import MenuCard3D from './MenuCard3D';
-import { ChevronDown, ChevronUp, Utensils, Sparkles, Filter } from 'lucide-react';
+import { ChevronDown, ChevronUp, Utensils, Sparkles, Filter, Search, Star, X } from 'lucide-react';
 
-const INITIAL_VISIBLE_COUNT = 6;
+const INITIAL_VISIBLE_COUNT = 9;
 
 export default function MenuSection() {
-  const [dietaryFilter, setDietaryFilter] = useState('all'); // 'all' | 'veg' | 'non-veg'
+  const [filterMode, setFilterMode] = useState('all'); // 'all' | 'must-try'
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
 
   // Refs for precise dynamic slider pill positioning
   const containerRef = useRef(null);
   const allBtnRef = useRef(null);
-  const vegBtnRef = useRef(null);
-  const nonVegBtnRef = useRef(null);
-  const [sliderStyle, setSliderStyle] = useState({ left: 6, width: 56 });
+  const mustTryBtnRef = useRef(null);
+  const [sliderStyle, setSliderStyle] = useState({ left: 6, width: 70 });
 
-  // Dynamically calculate slider position and reduce width from right side for 'All'
+  // Dynamically calculate slider position
   useEffect(() => {
     let target = null;
-    if (dietaryFilter === 'all') target = allBtnRef.current;
-    else if (dietaryFilter === 'veg') target = vegBtnRef.current;
-    else if (dietaryFilter === 'non-veg') target = nonVegBtnRef.current;
+    if (filterMode === 'all') target = allBtnRef.current;
+    else if (filterMode === 'must-try') target = mustTryBtnRef.current;
 
     if (target && containerRef.current) {
-      // Reduce width from the right side so it never crowds or touches the Veg green circle
-      const rightPaddingReduction = dietaryFilter === 'all' ? 7 : 0;
       setSliderStyle({
         left: target.offsetLeft,
-        width: Math.max(20, target.offsetWidth - rightPaddingReduction),
+        width: target.offsetWidth,
       });
     }
-  }, [dietaryFilter]);
+  }, [filterMode]);
 
-  // Filtered menu items based on dietary and category selection
+  // Filtered menu items based on filterMode, category, and search query
   const filteredItems = useMemo(() => {
     return MENU_ITEMS.filter((item) => {
-      // 1. Dietary filter check
-      const matchesDietary =
-        dietaryFilter === 'all' ? true : item.dietary === dietaryFilter;
+      // 1. Must Try mode filter
+      if (filterMode === 'must-try' && !item.mustTry) {
+        return false;
+      }
 
       // 2. Category filter check
-      const matchesCategory =
-        selectedCategory === 'all' ? true : item.category === selectedCategory;
+      if (selectedCategory !== 'all' && item.category !== selectedCategory) {
+        return false;
+      }
 
-      return matchesDietary && matchesCategory;
+      // 3. Search query check
+      if (searchQuery.trim()) {
+        const query = searchQuery.toLowerCase();
+        const matchesName = item.name.toLowerCase().includes(query);
+        const matchesDesc = item.description?.toLowerCase().includes(query);
+        const matchesTag = item.tagline?.toLowerCase().includes(query);
+        if (!matchesName && !matchesDesc && !matchesTag) {
+          return false;
+        }
+      }
+
+      return true;
     });
-  }, [dietaryFilter, selectedCategory]);
+  }, [filterMode, selectedCategory, searchQuery]);
 
   // Items to display based on "See More" expansion
   const visibleItems = isExpanded
@@ -56,9 +66,9 @@ export default function MenuSection() {
 
   const remainingCount = Math.max(0, filteredItems.length - INITIAL_VISIBLE_COUNT);
 
-  // Reset expansion when switching filters to keep layout neat
-  const handleDietaryChange = (filter) => {
-    setDietaryFilter(filter);
+  // Handlers
+  const handleFilterModeChange = (mode) => {
+    setFilterMode(mode);
     setIsExpanded(false);
   };
 
@@ -69,7 +79,6 @@ export default function MenuSection() {
 
   const toggleExpand = () => {
     if (isExpanded) {
-      // Smoothly scroll back to top of menu header when collapsing
       const menuSection = document.getElementById('menu');
       if (menuSection) {
         menuSection.scrollIntoView({ behavior: 'smooth' });
@@ -88,93 +97,115 @@ export default function MenuSection() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F0E8DC] border border-[#3B261D]/10 text-xs font-bold uppercase tracking-widest text-[#3B261D] mb-4 shadow-warm-sm">
             <Utensils className="w-3.5 h-3.5 text-[#C86D51]" />
-            <span>Artisanal Kitchen &amp; Brew Bar</span>
+            <span>100% Pure Vegetarian Coffee House &amp; Kitchen</span>
           </div>
           
           <h2 className="font-editorial text-4xl sm:text-5xl md:text-6xl font-black text-[#3B261D] tracking-tight">
-            Curated Menu
+            Two Stories Menu
           </h2>
 
           <p className="mt-4 text-base sm:text-lg text-[#7E5745] font-normal leading-relaxed">
-            Every dish is made to order using cold-pressed olive oils, stone-milled grains, house sauces, and freshly roasted single-origin coffees.
+            Crafted entirely pure vegetarian with premium ingredients: manual French press &amp; pour-over brews, velvety ice blends, sizzling platters, 10-inch stone-baked pizzas, loaded nachos, and rich desserts.
           </p>
         </div>
 
-        {/* 1. Animated Sliding Pill Dietary Toggle Slider with Reduced Right Width */}
-        <div className="flex flex-col items-center justify-center mb-8">
-          <div className="text-xs font-bold uppercase tracking-wider text-[#7E5745] mb-2.5 flex items-center gap-1.5">
-            <Filter className="w-3.5 h-3.5 text-[#C86D51]" />
-            <span>Dietary Preference</span>
+        {/* Controls Row: Pure Veg Toggle / Must-Try Slider + Live Search */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-5 mb-10 max-w-4xl mx-auto">
+          
+          {/* 1. Animated Sliding Pill Toggle: All Items | Must Try Specials */}
+          <div className="flex flex-col items-center sm:items-start">
+            <div className="text-[11px] font-bold uppercase tracking-wider text-[#7E5745] mb-2 flex items-center gap-1.5">
+              <Filter className="w-3 h-3 text-[#C86D51]" />
+              <span>Curated Selection</span>
+            </div>
+
+            <div 
+              ref={containerRef}
+              className="relative inline-flex items-center gap-1.5 p-1.5 rounded-full bg-[#FAF7F2] border border-[#3B261D]/15 shadow-warm-md"
+            >
+              {/* Sliding Pill Indicator */}
+              <div
+                className="absolute top-1.5 bottom-1.5 rounded-full bg-[#3B261D] shadow-sm transition-all duration-300 ease-out pointer-events-none"
+                style={{
+                  left: `${sliderStyle.left}px`,
+                  width: `${sliderStyle.width}px`,
+                }}
+              />
+
+              {/* Option 1: All Pure Veg */}
+              <button
+                ref={allBtnRef}
+                onClick={() => handleFilterModeChange('all')}
+                className={`relative z-10 px-5 py-2 rounded-full text-xs sm:text-sm font-bold tracking-wide flex items-center gap-1.5 transition-colors duration-200 cursor-pointer ${
+                  filterMode === 'all'
+                    ? 'text-[#FAF7F2]'
+                    : 'text-[#644436] hover:text-[#3B261D]'
+                }`}
+              >
+                <span className="w-2 h-2 rounded-full bg-[#2E7D32]" />
+                <span>All Items ({MENU_ITEMS.length})</span>
+              </button>
+
+              {/* Option 2: Must Try Only */}
+              <button
+                ref={mustTryBtnRef}
+                onClick={() => handleFilterModeChange('must-try')}
+                className={`relative z-10 px-5 py-2 rounded-full text-xs sm:text-sm font-bold tracking-wide flex items-center gap-1.5 transition-colors duration-200 cursor-pointer ${
+                  filterMode === 'must-try'
+                    ? 'text-[#FAF7F2]'
+                    : 'text-[#644436] hover:text-[#3B261D]'
+                }`}
+              >
+                <Star className="w-3.5 h-3.5 text-[#C86D51] fill-[#C86D51]" />
+                <span>Must Try Picks</span>
+              </button>
+            </div>
           </div>
 
-          <div 
-            ref={containerRef}
-            className="relative inline-flex items-center gap-2 p-1.5 rounded-full bg-[#FAF7F2] border border-[#3B261D]/15 shadow-warm-md"
-          >
-            {/* Sliding Pill Indicator (Width neatly reduced on the right side) */}
-            <div
-              className="absolute top-1.5 bottom-1.5 rounded-full bg-[#3B261D] shadow-sm transition-all duration-300 ease-out pointer-events-none"
-              style={{
-                left: `${sliderStyle.left}px`,
-                width: `${sliderStyle.width}px`,
-              }}
-            />
+          {/* 2. Search Bar for 100+ Menu Items */}
+          <div className="w-full md:w-80">
+            <div className="text-[11px] font-bold uppercase tracking-wider text-[#7E5745] mb-2 flex items-center gap-1.5">
+              <Search className="w-3 h-3 text-[#C86D51]" />
+              <span>Search Coffee &amp; Food</span>
+            </div>
 
-            {/* Option 1: All */}
-            <button
-              ref={allBtnRef}
-              onClick={() => handleDietaryChange('all')}
-              className={`relative z-10 px-5 py-2 rounded-full text-xs sm:text-sm font-bold tracking-wide transition-colors duration-200 cursor-pointer ${
-                dietaryFilter === 'all'
-                  ? 'text-[#FAF7F2]'
-                  : 'text-[#644436] hover:text-[#3B261D]'
-              }`}
-            >
-              All
-            </button>
-
-            {/* Option 2: Veg */}
-            <button
-              ref={vegBtnRef}
-              onClick={() => handleDietaryChange('veg')}
-              className={`relative z-10 px-5 py-2 rounded-full text-xs sm:text-sm font-bold tracking-wide flex items-center gap-2 transition-colors duration-200 cursor-pointer ${
-                dietaryFilter === 'veg'
-                  ? 'text-[#FAF7F2]'
-                  : 'text-[#644436] hover:text-[#3B261D]'
-              }`}
-            >
-              <span className="w-2.5 h-2.5 rounded-full bg-[#2E7D32] ring-2 ring-white/60 shrink-0" />
-              <span>Veg</span>
-            </button>
-
-            {/* Option 3: Non-Veg */}
-            <button
-              ref={nonVegBtnRef}
-              onClick={() => handleDietaryChange('non-veg')}
-              className={`relative z-10 px-5 py-2 rounded-full text-xs sm:text-sm font-bold tracking-wide flex items-center gap-2 transition-colors duration-200 cursor-pointer ${
-                dietaryFilter === 'non-veg'
-                  ? 'text-[#FAF7F2]'
-                  : 'text-[#644436] hover:text-[#3B261D]'
-              }`}
-            >
-              <span className="w-2.5 h-2.5 rounded-full bg-[#C62828] ring-2 ring-white/60 shrink-0" />
-              <span>Non-Veg</span>
-            </button>
+            <div className="relative">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setIsExpanded(false);
+                }}
+                placeholder="Search Latte, Sizzler, Pasta, Shakes..."
+                className="w-full pl-10 pr-9 py-2.5 rounded-full bg-[#FAF7F2] border border-[#3B261D]/15 text-xs sm:text-sm text-[#3B261D] placeholder:text-[#7E5745]/60 focus:outline-none focus:border-[#C86D51] focus:ring-2 focus:ring-[#C86D51]/20 shadow-warm-sm transition-all"
+              />
+              <Search className="w-4 h-4 text-[#7E5745] absolute left-3.5 top-3 pointer-events-none" />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-3 top-2.5 p-0.5 rounded-full hover:bg-[#F0E8DC] text-[#7E5745]"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
           </div>
+
         </div>
 
-        {/* 2. Horizontal Category Filter Tabs */}
-        <div className="flex items-center justify-start sm:justify-center overflow-x-auto pb-4 mb-12 scrollbar-none gap-2 px-2">
+        {/* 3. Horizontal Category Filter Tabs */}
+        <div className="flex items-center justify-start lg:justify-center overflow-x-auto pb-4 mb-12 scrollbar-none gap-2 px-2">
           {CATEGORIES.map((cat) => {
             const isSelected = selectedCategory === cat.id;
             return (
               <button
                 key={cat.id}
                 onClick={() => handleCategoryChange(cat.id)}
-                className={`whitespace-nowrap px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer flex items-center gap-2 ${
+                className={`whitespace-nowrap px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer flex items-center gap-2 ${
                   isSelected
                     ? 'bg-[#C86D51] text-white shadow-warm-md -translate-y-0.5'
                     : 'bg-[#FAF7F2] text-[#3B261D] hover:bg-[#F0E8DC] border border-[#3B261D]/10'
@@ -189,7 +220,7 @@ export default function MenuSection() {
           })}
         </div>
 
-        {/* 3. Responsive 3D Menu Grid */}
+        {/* 4. Responsive 3D Menu Grid */}
         {visibleItems.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 perspective-container">
             {visibleItems.map((item) => (
@@ -200,15 +231,16 @@ export default function MenuSection() {
           <div className="text-center py-20 bg-[#FAF7F2] rounded-3xl border border-[#3B261D]/10 max-w-md mx-auto">
             <Sparkles className="w-8 h-8 text-[#C86D51] mx-auto mb-3" />
             <h3 className="font-editorial text-2xl font-bold text-[#3B261D] mb-1">
-              No Items Found
+              No Dishes Found
             </h3>
             <p className="text-sm text-[#7E5745] mb-5">
-              Try switching your dietary or category filter.
+              Try adjusting your search query or category filter.
             </p>
             <button
               onClick={() => {
-                setDietaryFilter('all');
+                setFilterMode('all');
                 setSelectedCategory('all');
+                setSearchQuery('');
               }}
               className="px-5 py-2 rounded-full bg-[#3B261D] text-[#FAF7F2] text-xs font-bold hover:bg-[#C86D51] transition-colors"
             >
@@ -217,7 +249,7 @@ export default function MenuSection() {
           </div>
         )}
 
-        {/* 4. "See More Items" / "Show Less" Pagination Button */}
+        {/* 5. "See More Items" / "Show Less" Pagination Button */}
         {filteredItems.length > INITIAL_VISIBLE_COUNT && (
           <div className="mt-14 text-center">
             <button
@@ -236,7 +268,7 @@ export default function MenuSection() {
               )}
             </button>
             <p className="text-xs text-[#7E5745] mt-2 font-medium">
-              Showing {visibleItems.length} of {filteredItems.length} curated delights
+              Showing {visibleItems.length} of {filteredItems.length} vegetarian creations
             </p>
           </div>
         )}

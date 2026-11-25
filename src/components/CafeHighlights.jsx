@@ -1,31 +1,31 @@
 import React from 'react';
-import { Coffee, Flame, HeartHandshake, Sparkles, Clock, Compass } from 'lucide-react';
+import { Coffee, Flame, HeartHandshake, Sparkles, Clock, Compass, UtensilsCrossed } from 'lucide-react';
 
 export default function CafeHighlights() {
   const highlights = [
     {
       icon: Coffee,
-      title: "Artisanal Brew Bar",
-      subtitle: "Single-Origin & Manual Pours",
-      desc: "From smooth Kyoto cold brews to ceremonial Japanese matcha and velvety flat whites pulled on precision machinery."
+      title: "Artisanal Specialty Coffee",
+      subtitle: "Pour Over & French Press",
+      desc: "From manual French press and slow pour-overs to velvety D-day lattes, Vietnamese iced coffee, and indulgent Java chip ice blends."
     },
     {
       icon: Flame,
-      title: "Wood-Fired & Brioche",
-      subtitle: "Fresh From Scratch Daily",
-      desc: "Hand-stretched 10-inch Neapolitan style dough, golden brioche burger buns, and herb-buttered toast crisped fresh on order."
+      title: "Sizzlers, Pizzas & Pastas",
+      subtitle: "100% Pure Vegetarian Kitchen",
+      desc: "Mexican and Asian sizzling platters, 10-inch stone-baked pizzas, Genovese pesto aglio-e-olio, and cheesy loaded nachos freshly prepared."
     },
     {
       icon: Compass,
-      title: "Aesthetic Samarth Nagar Corner",
-      subtitle: "Beside IRA Executive",
-      desc: "Tucked inside Nirala Bazar's leafy neighborhood — a cozy haven designed with earthy textures, warm latte tones, and curated lounge playlists."
+      title: "Aesthetic Ulkanagari Sanctuary",
+      subtitle: "Near Khinvansara Park",
+      desc: "Tucked inside Sai Heritage, Shrikrishna Nagar — an earthy, ambient corner crafted with warm latte tones, cozy seating, and unhurried charm."
     },
     {
       icon: HeartHandshake,
-      title: "Community & Work Lounge",
-      subtitle: "Unwind, Read & Connect",
-      desc: "Whether catching up on deep work over an Iced Mocha or gathering friends for a cheesecake evening, every corner welcomes you."
+      title: "Late-Night Lounge",
+      subtitle: "Open Till 2:15 AM",
+      desc: "Whether unwinding over an after-dinner dessert, enjoying family dining, or gathering friends for late-night coffee, our doors stay open late."
     }
   ];
 
@@ -37,15 +37,15 @@ export default function CafeHighlights() {
         <div className="max-w-3xl mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F0E8DC] text-xs font-bold uppercase tracking-widest text-[#C86D51] mb-3">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>The Tales &amp; Toast Way</span>
+            <span>The Two Stories Experience</span>
           </div>
 
           <h2 className="font-editorial text-4xl sm:text-5xl font-extrabold text-[#3B261D] tracking-tight leading-tight">
-            Cozy Ambience Meets Gourmet Craft
+            Cozy Ambience Meets Vegetarian Craft
           </h2>
 
           <p className="mt-4 text-base sm:text-lg text-[#7E5745] font-normal leading-relaxed">
-            We built Tales &amp; Toast around a simple conviction: great conversations happen over exceptional food, fragrant coffee, and warm spaces that feel like home.
+            We built Two Stories Coffee &amp; Kitchen around a simple conviction: the best memories begin with great conversations, steaming cups of specialty coffee, and comforting, soul-satisfying pure vegetarian food.
           </p>
         </div>
 
@@ -74,7 +74,7 @@ export default function CafeHighlights() {
                 </div>
 
                 <div className="mt-6 pt-4 border-t border-[#3B261D]/10 text-xs font-semibold text-[#7E5745] flex items-center justify-between">
-                  <span>Tales &amp; Toast standard</span>
+                  <span>Two Stories standard</span>
                   <span className="w-2 h-2 rounded-full bg-[#C86D51]/50 group-hover:bg-[#C86D51] transition-colors" />
                 </div>
               </div>

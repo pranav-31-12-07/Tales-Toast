@@ -14,18 +14,18 @@ export default function App() {
 
       {/* Main Content Sections */}
       <main>
-        {/* Aesthetic Café Hero Section (with blurred floating orbs & animations) */}
+        {/* Two Stories Hero Section (Specialty Coffee & Kitchen) */}
         <HeroSection />
 
-        {/* Interactive 3D Menu Section with Veg/Non-Veg Slider & Pagination */}
+        {/* 100% Pure Veg 3D Menu Section with Category & Search Filters */}
         <MenuSection />
 
-        {/* Atmosphere & Café Identity */}
+        {/* Atmosphere, Sizzlers & Pure Veg Kitchen Identity */}
         <div id="atmosphere">
           <CafeHighlights />
         </div>
 
-        {/* Visit Us & Custom Red-Pin Map (Zero Reservation Form) */}
+        {/* Visit Two Stories & Interactive Map (Ulkanagari, Near Khinvansara Park) */}
         <VisitSection />
       </main>
 
